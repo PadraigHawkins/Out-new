@@ -22,6 +22,9 @@ body {
     color:#ff6b00;
     padding: 30px;
     text-align: center;
+    position: sticky;
+    top: 0; /* Sticks the header to the top of the viewport */
+    z-index: 1000; /* Ensures the header stays above other content */
 }
 
 .app-content {
@@ -78,6 +81,9 @@ body {
     color: #ff6b00;
     text-align: center;
     padding: 30px;
+    position: sticky;
+    bottom: 0; /* Sticks the footer to the bottom of the viewport */
+    z-index: 1000; /* Ensures the footer stays above other content */
 }
 
 
