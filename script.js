@@ -57,15 +57,18 @@ let isDragging = false;
 let startX = 0;
 let currentX = 0;
 
-slider.addEventListener('mousedown', (event) => {
+// Function to handle the start of a drag (mouse or touch)
+function onDragStart(event) {
     isDragging = true;
-    startX = event.clientX;
-});
+    startX = event.type === 'touchstart' ? event.touches[0].clientX : event.clientX;
+}
 
-document.addEventListener('mousemove', (event) => {
+// Function to handle the dragging (mouse or touch move)
+function onDragMove(event) {
     if (!isDragging) return;
 
-    currentX = event.clientX - startX;
+    const clientX = event.type === 'touchmove' ? event.touches[0].clientX : event.clientX;
+    currentX = clientX - startX;
 
     // Constrain the slider movement within the swipe button
     const maxMove = swipeButton.offsetWidth - slider.offsetWidth - 10;
@@ -73,9 +76,10 @@ document.addEventListener('mousemove', (event) => {
     if (currentX > maxMove) currentX = maxMove;
 
     slider.style.left = `${currentX}px`;
-});
+}
 
-document.addEventListener('mouseup', () => {
+// Function to handle the end of a drag (mouse or touch)
+function onDragEnd() {
     if (!isDragging) return;
 
     isDragging = false;
@@ -89,4 +93,15 @@ document.addEventListener('mouseup', () => {
         // Reset slider position if not confirmed
         slider.style.left = '5px';
     }
-});
+}
+
+// Mouse event listeners
+slider.addEventListener('mousedown', onDragStart);
+document.addEventListener('mousemove', onDragMove);
+document.addEventListener('mouseup', onDragEnd);
+
+// Touch event listeners
+slider.addEventListener('touchstart', onDragStart);
+document.addEventListener('touchmove', onDragMove);
+document.addEventListener('touchend', onDragEnd);
+
