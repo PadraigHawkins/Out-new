@@ -1,59 +1,49 @@
-
-
-
+// List of pubs with their Google Maps links
 const pubs = [
-    'The Temple Bar',
-    'The Guinness Storehouse',
-    'O’Neill’s Pub',
-    'The Brazen Head',
-    'The Porterhouse',
-    'The Long Hall',
-    'The Dawson Lounge',
-    'The Auld Dubliner',
-    'The Fitzsimons',
-    'The Clarence',
-    'The Mercantile',
-    'The Woollen Mills',
-    'Murray’s Bar',
-    'The Hill',
-    'The Living Room',
-    'The Blind Pig',
-    'The Palace Bar',
-    'The Stag’s Head',
-    'The Castle Lounge',
-    'The Old Storehouse',
-    'The Flowing Tide',
-    'Doheny & Nesbitt',
-    'The Bernard Shaw',
-    'The Little Pig',
-    'The Cobblestone',
-    'The Workman’s Club',
-    'The Living Room',
-    'The Sugar Club',
-    'The George',
-    'The Abbey Tavern'
+    { name: "The Temple Bar", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" },
+    { name: "O'Donoghue's", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" },
+    { name: "The Brazen Head", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" },
+    { name: "The Long Hall", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" },
+    { name: "Kehoe's", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" },
+    { name: "Mulligan's", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" },
+    { name: "The Stag's Head", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" },
+    { name: "Grogan's", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" },
+    { name: "The Palace Bar", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" },
+    { name: "Doheny & Nesbitt", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" }
 ];
 
+// Function to change the pub name with a jumping animation
 function changePub() {
-    const pubElement = document.getElementById('randomPub');
+    const pubLink = document.getElementById('pubLink');
     const iterations = 10; // Number of jumps before landing
     let count = 0;
 
-    const jumpInterval = setInterval(() => {
+    // Clear any existing interval to prevent multiple animations
+    if (window.jumpInterval) {
+        clearInterval(window.jumpInterval);
+    }
+
+    // Start the jumping animation
+    window.jumpInterval = setInterval(() => {
+        // Get a random pub from the list
         const randomIndex = Math.floor(Math.random() * pubs.length);
-        pubElement.textContent = pubs[randomIndex];
-        pubElement.style.transform = 'translateY(-10px)'; // Jump up
+        const selectedPub = pubs[randomIndex];
+
+        // Update the link text and URL
+        pubLink.textContent = selectedPub.name;
+        pubLink.href = selectedPub.link;
+        pubLink.target = "_blank"; // Open link in a new tab
+
+        // Jump animation effect
+        pubLink.style.transform = 'translateY(-10px)';
         setTimeout(() => {
-            pubElement.style.transform = 'translateY(0)'; // Land down
-        }, 10);
+            pubLink.style.transform = 'translateY(0)';
+        }, 100);
 
         count++;
-
-        if (count === iterations) {
-            clearInterval(jumpInterval);
-            // Finally set the last pub after the jumps
-            const finalIndex = Math.floor(Math.random() * pubs.length);
-            pubElement.textContent = pubs[finalIndex];
+        // Stop the animation after the specified number of iterations
+        if (count >= iterations) {
+            clearInterval(window.jumpInterval);
         }
-    }, 200); // Interval for jump
+    }, 150);
 }
