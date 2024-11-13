@@ -48,60 +48,14 @@ function changePub() {
     }, 150);
 }
 
-// Swipe Button Functionality
-const swipeButton = document.getElementById('swipeButton');
-const slider = document.getElementById('slider');
-const swipeText = document.getElementById('swipeText');
+const toggleButton = document.getElementById('toggleButton');
+const toggleStatus = document.getElementById('toggleStatus');
 
-let isDragging = false;
-let startX = 0;
-let currentX = 0;
-
-// Function to handle the start of a drag (mouse or touch)
-function onDragStart(event) {
-    isDragging = true;
-    startX = event.type === 'touchstart' ? event.touches[0].clientX : event.clientX;
-}
-
-// Function to handle the dragging (mouse or touch move)
-function onDragMove(event) {
-    if (!isDragging) return;
-
-    const clientX = event.type === 'touchmove' ? event.touches[0].clientX : event.clientX;
-    currentX = clientX - startX;
-
-    // Constrain the slider movement within the swipe button
-    const maxMove = swipeButton.offsetWidth - slider.offsetWidth - 10;
-    if (currentX < 0) currentX = 0;
-    if (currentX > maxMove) currentX = maxMove;
-
-    slider.style.left = `${currentX}px`;
-}
-
-// Function to handle the end of a drag (mouse or touch)
-function onDragEnd() {
-    if (!isDragging) return;
-
-    isDragging = false;
-
-    // Check if the slider was moved to the end
-    const maxMove = swipeButton.offsetWidth - slider.offsetWidth - 10;
-    if (currentX >= maxMove) {
-        swipeButton.classList.add('confirmed');
-        alert('Swipe Confirmed!');
+toggleButton.addEventListener('change', () => {
+    if (toggleButton.checked) {
+        toggleStatus.textContent = 'Cocktails';
     } else {
-        // Reset slider position if not confirmed
-        slider.style.left = '5px';
+        toggleStatus.textContent = 'Pints';
     }
-}
-
-// Mouse event listeners
-slider.addEventListener('mousedown', onDragStart);
-document.addEventListener('mousemove', onDragMove);
-document.addEventListener('mouseup', onDragEnd);
-
-// Touch event listeners
-slider.addEventListener('touchstart', onDragStart);
-document.addEventListener('touchmove', onDragMove);
-document.addEventListener('touchend', onDragEnd);
+});
 
