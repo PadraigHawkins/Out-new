@@ -76,6 +76,61 @@ body {
     background-color: #005f7f;
 }
 
+
+/* Swipe Button Styles */
+.swipe-button-container {
+    width: 300px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.swipe-button {
+    background-color: #008CBA;
+    color: white;
+    padding: 10px;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 18px;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+}
+
+.slider {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s;
+}
+
+#swipeText {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.swipe-button.confirmed #swipeText {
+    opacity: 0;
+}
+
+.swipe-button.confirmed .slider {
+    background-color: #4CAF50;
+    left: calc(100% - 45px);
+}
+
+
+
 .app-footer {
     background-color: #fff6cf;
     color: #ff6b00;

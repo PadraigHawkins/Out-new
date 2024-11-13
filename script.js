@@ -47,3 +47,46 @@ function changePub() {
         }
     }, 150);
 }
+
+// Swipe Button Functionality
+const swipeButton = document.getElementById('swipeButton');
+const slider = document.getElementById('slider');
+const swipeText = document.getElementById('swipeText');
+
+let isDragging = false;
+let startX = 0;
+let currentX = 0;
+
+slider.addEventListener('mousedown', (event) => {
+    isDragging = true;
+    startX = event.clientX;
+});
+
+document.addEventListener('mousemove', (event) => {
+    if (!isDragging) return;
+
+    currentX = event.clientX - startX;
+
+    // Constrain the slider movement within the swipe button
+    const maxMove = swipeButton.offsetWidth - slider.offsetWidth - 10;
+    if (currentX < 0) currentX = 0;
+    if (currentX > maxMove) currentX = maxMove;
+
+    slider.style.left = `${currentX}px`;
+});
+
+document.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+
+    isDragging = false;
+
+    // Check if the slider was moved to the end
+    const maxMove = swipeButton.offsetWidth - slider.offsetWidth - 10;
+    if (currentX >= maxMove) {
+        swipeButton.classList.add('confirmed');
+        alert('Swipe Confirmed!');
+    } else {
+        // Reset slider position if not confirmed
+        slider.style.left = '5px';
+    }
+});
