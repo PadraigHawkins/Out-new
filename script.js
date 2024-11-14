@@ -1,16 +1,69 @@
-// List of pubs with their Google Maps links
+const toggleButton = document.getElementById('toggleButton');
+const toggleStatus = document.getElementById('toggleStatus');
+const itemLink = document.getElementById('itemLink');
+
 const pubs = [
-    { name: "The Temple Bar", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" },
-    { name: "O'Donoghue's", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" },
-    { name: "The Brazen Head", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" },
-    { name: "The Long Hall", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" },
-    { name: "Kehoe's", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" },
-    { name: "Mulligan's", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" },
-    { name: "The Stag's Head", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" },
-    { name: "Grogan's", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" },
-    { name: "The Palace Bar", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" },
-    { name: "Doheny & Nesbitt", link: "https://maps.app.goo.gl/mFQ2MG7avKvvn3hv9" }
+    { name: "The Temple Bar", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" },
+    { name: "The Long Hall", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" },
+    { name: "The Brazen Head", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" },
+    { name: "O'Donoghue's", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" },
+    { name: "The Stag's Head", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" }
 ];
+
+const animals = [
+    { name: "Vintage Cocktail Club", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" },
+    { name: "Peruke & Periwig", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" },
+    { name: "9 Below", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" },
+    { name: "Ohana", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" },
+    { name: "37 Dawson Street", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" }
+];
+
+let currentList = pubs; // Default list is pubs
+let isAnimating = false;
+
+// Function to animate the list jumping through options
+function animateJump() {
+    if (isAnimating) return; // Prevent multiple clicks during animation
+
+    isAnimating = true;
+    let index = 0;
+    const jumpDuration = 2000; // Total animation duration (2 seconds)
+    const intervalSpeed = 100; // Speed of the jumps (100 milliseconds)
+
+    const interval = setInterval(() => {
+        const item = currentList[index];
+        itemLink.textContent = item.name;
+        itemLink.href = item.url;
+
+        index = (index + 1) % currentList.length;
+    }, intervalSpeed);
+
+    // Stop the animation after the jump duration and land on a final item
+    setTimeout(() => {
+        clearInterval(interval);
+        const randomItem = currentList[Math.floor(Math.random() * currentList.length)];
+        itemLink.textContent = randomItem.name;
+        itemLink.href = randomItem.url;
+        isAnimating = false;
+    }, jumpDuration);
+}
+
+// Event listener for the toggle button
+toggleButton.addEventListener('change', () => {
+    if (toggleButton.checked) {
+        toggleStatus.textContent = 'Cocktails';
+        currentList = animals; // Switch to animal names
+    } else {
+        toggleStatus.textContent = 'Pints';
+        currentList = pubs; // Switch back to pub names
+    }
+});
+
+// HTML button onclick handler
+document.querySelector('.change-name-button').addEventListener('click', animateJump);
+
+
+
 
 // Function to change the pub name with a jumping animation
 function changePub() {
@@ -48,14 +101,5 @@ function changePub() {
     }, 150);
 }
 
-const toggleButton = document.getElementById('toggleButton');
-const toggleStatus = document.getElementById('toggleStatus');
 
-toggleButton.addEventListener('change', () => {
-    if (toggleButton.checked) {
-        toggleStatus.textContent = 'Cocktails';
-    } else {
-        toggleStatus.textContent = 'Pints';
-    }
-});
 
