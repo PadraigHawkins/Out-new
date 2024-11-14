@@ -28,7 +28,7 @@ function animateJump() {
     isAnimating = true;
     let index = 0;
     const jumpDuration = 2000; // Total animation duration (2 seconds)
-    const intervalSpeed = 100; // Speed of the jumps (100 milliseconds)
+    const intervalSpeed = 150; // Speed of the jumps (100 milliseconds)
 
     const interval = setInterval(() => {
         const item = currentList[index];
