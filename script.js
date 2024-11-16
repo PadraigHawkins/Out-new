@@ -3,19 +3,48 @@ const toggleStatus = document.getElementById('toggleStatus');
 const itemLink = document.getElementById('itemLink');
 
 const pubs = [
-    { name: "The Temple Bar", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" },
-    { name: "The Long Hall", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" },
-    { name: "The Brazen Head", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" },
-    { name: "O'Donoghue's", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" },
-    { name: "The Stag's Head", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" }
+    { name: "Grogan’s", url: "https://maps.app.goo.gl/Ka4DjbqXRn89g95u7" },
+    { name: "The Long Hall", url: "https://maps.app.goo.gl/rdCrB5uz9w4THQDy6" },
+    { name: "The Brazen Head", url: "https://maps.app.goo.gl/u7gJwsqpYUvBQXWi8" },
+    { name: "O'Donoghue's", url: "https://maps.app.goo.gl/pFQag1uRYTfqWuKU7" },
+    { name: "Toners’s", url: "https://maps.app.goo.gl/2auFbXj9eKZbJvY1A" },
+    { name: "Ryan's", url: "https://maps.app.goo.gl/ECSTizvsBrVTH5HUA" },
+    { name: "Kehoes", url: "https://maps.app.goo.gl/UjH5Ey7qiuuYHbsw6" },
+    { name: "Devitts", url: "https://maps.app.goo.gl/QzQfZgagNXMB1BXTA" },
+    { name: "Searson’s", url: "https://maps.app.goo.gl/cgeEqdMWAg6oPsrGA" },
+    { name: "The Celt", url: "https://maps.app.goo.gl/kv1JFS4vJVz3Fjig8" },
+    { name: "Hogans", url: "https://maps.app.goo.gl/SeEk9GZJmP4tNt5L7" },
+    { name: "The Old Stand", url: "https://maps.app.goo.gl/8cQgYTnPyKAjHRfK8" },
+    { name: "International Bar", url: "https://maps.app.goo.gl/jnEcrazRVA6JV9Rf8" },
+    { name: "Mary's Bar", url: "https://maps.app.goo.gl/sFzair3KzvNtaepaA" },
+    { name: "Sinnotts Bar", url: "https://maps.app.goo.gl/Cuwg5RR24G78AfyS6" },
+    { name: "The Camden", url: "https://maps.app.goo.gl/rBugNe5btBZ9CKqA8" },
+    { name: "Jimmy Rabbitte's", url: "https://maps.app.goo.gl/ia8SSioKcUU6Vy4P9" },
+    { name: "The Bleeding Horse", url: "https://maps.app.goo.gl/w9rBSe1EjwPmzkfXA" },
+    { name: "The Ginger Man", url: "https://maps.app.goo.gl/G7Dos6nicNeB48ix8" },
+    { name: "Cassidy's", url: "https://maps.app.goo.gl/jA7HyxfaczFTYJM39" },
+    { name: "Doyle's", url: "https://maps.app.goo.gl/u5NWGa7Ffib4Mybd8" },
+    { name: "4 Dame Ln", url: "https://maps.app.goo.gl/yDkRFXApJQvcqNzb7" },
+    { name: "Riot", url: "https://maps.app.goo.gl/ShUX3BwA8NV915D8A" },
+    { name: "The Stag's Head", url: "https://maps.app.goo.gl/jwjSy9iuvvW22eNP8" }
 ];
 
 const animals = [
-    { name: "Vintage Cocktail Club", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" },
-    { name: "Peruke & Periwig", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" },
-    { name: "9 Below", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" },
-    { name: "Ohana", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" },
-    { name: "37 Dawson Street", url: "https://maps.app.goo.gl/n5Btp5fxDG6iNSp68" }
+    { name: "Pyg", url: "https://maps.app.goo.gl/3t3BvbhfaiNfsE5V9" },
+    { name: "Peruke & Periwig", url: "https://maps.app.goo.gl/ADEzzvwcStqBVLYv8" },
+    { name: "9 Below", url: "https://maps.app.goo.gl/zX9MU9SAFK8LGCxk9" },
+    { name: "Ohana", url: "https://maps.app.goo.gl/YNKxwvrkeGuNmDvt8" },
+    { name: "Dakota", url: "https://maps.app.goo.gl/8n8Ri6mkTfXYemdt6" },
+    { name: "Farrier & Draper", url: "https://maps.app.goo.gl/GxkjX8FpX4NmpzZ57" },
+    { name: "PYG", url: "https://maps.app.goo.gl/3t3BvbhfaiNfsE5V9" },
+    { name: "Café en Seine", url: "https://maps.app.goo.gl/BCwaPWVNpmiu4XzC8" },
+    { name: "Lemon & Duke", url: "https://maps.app.goo.gl/vJNVrunNuEhr29MY9" },
+    { name: "Zozimus Bar", url: "https://maps.app.goo.gl/otu5r9RuD2NuWGAv5" },
+    { name: "The Odeon", url: "https://maps.app.goo.gl/rFjB4FwKvWcK2jhJ7" },
+    { name: "The Glasshouse", url: "https://maps.app.goo.gl/qSUpTVVzRGBVwRFeA" },
+    { name: "House Dublin", url: "https://maps.app.goo.gl/pV6vhuyxyNyVTkKfA" },
+    { name: "NoLita", url: "https://maps.app.goo.gl/MELiuTUYez3nBgpS6" },
+    { name: "37 Dawson Street", url: "https://maps.app.goo.gl/YJJtbzT6esvyfWpT8" }
 ];
 
 let currentList = pubs; // Default list is pubs
