@@ -140,11 +140,14 @@ input:checked + .slider:before {
     right: 20px;
     width: 60px;
     height: 60px;
-    background-color: #ff6b00;
+    background-color: #007BFF;
     color: #fff;
     font-size: 24px;
+    text-align: center;
+    line-height: 60px;
     border: none;
     border-radius: 50%;
+    text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -158,6 +161,7 @@ input:checked + .slider:before {
     background-color: #0056b3;
     transform: scale(1.1);
 }
+
 
 
 
