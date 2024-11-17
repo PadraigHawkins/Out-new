@@ -136,7 +136,7 @@ input:checked + .slider:before {
 /* Circular Contact Us Button */
 .contact-circle-button {
     position: fixed;
-    bottom: 150px;
+    bottom: 100px;
     right: 20px;
     width: 60px;
     height: 60px;
