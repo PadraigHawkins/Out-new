@@ -130,8 +130,3 @@ function changePub() {
     }, 150);
 }
 
-
-
-document.querySelector('.contact-circle-button').addEventListener('click', () => {
-    window.location.href = "mailto:support@example.com?subject=Contact%20Us";
-});

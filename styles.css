@@ -133,38 +133,6 @@ input:checked + .slider:before {
 }
 
 
-/* Circular Contact Us Button */
-.contact-circle-button {
-    position: fixed;
-    bottom: 100px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    background-color: #ff6b00;
-    color: #fff;
-    font-size: 24px;
-    text-align: center;
-    line-height: 60px;
-    border: none;
-    border-radius: 50%;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    z-index: 1000;
-}
-
-.contact-circle-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.1);
-}
-
-
-
-
 
 .app-footer {
     background-color: #fff6cf;
@@ -176,4 +144,12 @@ input:checked + .slider:before {
     z-index: 1000; /* Ensures the footer stays above other content */
 }
 
+.email-link {
+    color: #ff6b00;
+    text-decoration: none;
+    font-weight: bold;
+}
 
+.email-link:hover {
+    text-decoration: none;
+}
