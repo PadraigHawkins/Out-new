@@ -63,7 +63,7 @@ body {
 }
 
 .change-name-button {
-    background-color: #244f9d;
+    background-color: #0056b3;
     color: white;
     border: 1px solid #000000; /* Dark border around the content */
     padding: 15px 32px;
@@ -136,11 +136,11 @@ input:checked + .slider:before {
 /* Circular Contact Us Button */
 .contact-circle-button {
     position: fixed;
-    bottom: 100px;
+    bottom: 150px;
     right: 20px;
     width: 60px;
     height: 60px;
-    background-color: #007BFF;
+    background-color: #ff6b00;
     color: #fff;
     font-size: 24px;
     text-align: center;
