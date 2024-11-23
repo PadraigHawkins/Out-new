@@ -2,6 +2,35 @@ const toggleButton = document.getElementById('toggleButton');
 const toggleStatus = document.getElementById('toggleStatus');
 const itemLink = document.getElementById('itemLink');
 
+
+// Cookie Consent Popup Logic
+const cookieConsentPopup = document.getElementById('cookieConsentPopup');
+const acceptCookiesButton = document.getElementById('acceptCookiesButton');
+const overlay = document.getElementById('overlay');
+
+// Check if user has already accepted cookies
+if (!localStorage.getItem('cookieConsent')) {
+    // If not, show the cookie consent popup and overlay
+    cookieConsentPopup.style.display = 'block';
+    overlay.style.display = 'block';
+}
+
+// When user clicks on "Accept" button
+acceptCookiesButton.addEventListener('click', () => {
+    // Store user consent in localStorage
+    localStorage.setItem('cookieConsent', 'true');
+    
+    // Hide the popup and overlay after acceptance
+    cookieConsentPopup.style.display = 'none';
+    overlay.style.display = 'none';
+
+    // Initialize Google Analytics after consent
+    gtag('config', 'G-3S5PMLPMEJ'); // Replace with your GA ID
+});
+
+
+
+
 const pubs = [
     { name: "Grogan’s", url: "https://maps.app.goo.gl/Ka4DjbqXRn89g95u7" },
     { name: "The Long Hall", url: "https://maps.app.goo.gl/rdCrB5uz9w4THQDy6" },
@@ -81,7 +110,7 @@ function animateJump() {
 toggleButton.addEventListener('change', () => {
     if (toggleButton.checked) {
         toggleStatus.textContent = 'Cocktails';
-        currentList = animals; // Switch to animal names
+        currentList = animals; // Switch to cocktail names
     } else {
         toggleStatus.textContent = 'Pints';
         currentList = pubs; // Switch back to pub names
