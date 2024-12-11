@@ -32,7 +32,8 @@ body {
 
 .pub-list-header {
     font-size: 24px;
-    color: #333;
+    font-family: cursive;
+    color: #ff6b00;
     margin-bottom: 20px;
     font-weight:bolder;
     text-align: center; /* Centers the header text */
