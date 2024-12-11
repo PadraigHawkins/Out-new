@@ -37,6 +37,7 @@ const pubs = [
     { name: "The Brazen Head", url: "https://maps.app.goo.gl/u7gJwsqpYUvBQXWi8" },
     { name: "O'Donoghue's", url: "https://maps.app.goo.gl/pFQag1uRYTfqWuKU7" },
     { name: "Toners’s", url: "https://maps.app.goo.gl/2auFbXj9eKZbJvY1A" },
+    { name: "The Kings Inn", url: "https://maps.app.goo.gl/dkp14CqYaHRthf3KA" },
     { name: "Ryan's", url: "https://maps.app.goo.gl/ECSTizvsBrVTH5HUA" },
     { name: "Kehoes", url: "https://maps.app.goo.gl/UjH5Ey7qiuuYHbsw6" },
     { name: "Devitts", url: "https://maps.app.goo.gl/QzQfZgagNXMB1BXTA" },
