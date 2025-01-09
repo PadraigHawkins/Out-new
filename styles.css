@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     background-color: #fff6cf;
     
 }
@@ -19,7 +19,7 @@ body {
 
 .app-header {
     background-color: #fff6cf;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color:#ff6b00;
     padding: 20px;
     text-align: center;
@@ -229,7 +229,7 @@ input:checked + .slider:before {
 .email-link {
     color: #ff6b00;
     text-decoration: none;
-    font-weight: bold;
+    font-weight:lighter;
 }
 
 .email-link:hover {
