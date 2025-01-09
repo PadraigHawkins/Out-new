@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: Arial, sans-serif;
     background-color: #fff6cf;
     
 }
@@ -19,7 +19,7 @@ body {
 
 .app-header {
     background-color: #fff6cf;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color:#ff6b00;
     padding: 20px;
     text-align: center;
@@ -32,7 +32,7 @@ body {
 
 .pub-list-header {
     font-size: 24px;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: #ff6b00;
     margin-bottom: 20px;
     font-weight:bolder;
@@ -229,7 +229,7 @@ input:checked + .slider:before {
 .email-link {
     color: #ff6b00;
     text-decoration: none;
-    font-weight:lighter;
+    font-weight: bold;
 }
 
 .email-link:hover {
