@@ -84,6 +84,7 @@ const animals = [
 let currentList = pubs; // Default list is pubs
 let isAnimating = false;
 
+
 // Function to animate the list jumping through options
 function animateJump() {
     if (isAnimating) return; // Prevent multiple clicks during animation
@@ -110,6 +111,8 @@ function animateJump() {
         isAnimating = false;
     }, jumpDuration);
 }
+
+
 
 // Event listener for the toggle button
 toggleButton.addEventListener('change', () => {
