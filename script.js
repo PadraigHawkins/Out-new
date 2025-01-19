@@ -1,6 +1,8 @@
 const toggleButton = document.getElementById('toggleButton');
 const toggleStatus = document.getElementById('toggleStatus');
 const itemLink = document.getElementById('itemLink');
+const changeNameButton = document.querySelector('.change-name-button');
+const nameContainer = document.querySelector('.name-container');
 
 
 // Cookie Consent Popup Logic
@@ -81,9 +83,12 @@ const animals = [
     { name: "37 Dawson Street", url: "https://maps.app.goo.gl/YJJtbzT6esvyfWpT8" }
 ];
 
+
+
+
 let currentList = pubs; // Default list is pubs
 let isAnimating = false;
-
+let hasAddedDirections = false; // Flag to check if "Get directions" has been added
 
 // Function to animate the list jumping through options
 function animateJump() {
@@ -109,8 +114,41 @@ function animateJump() {
         itemLink.textContent = randomItem.name;
         itemLink.href = randomItem.url;
         isAnimating = false;
+
+        // Add "Get directions" if it's the first time the button is clicked
+        if (!hasAddedDirections) {
+            addDirections();
+            hasAddedDirections = true;
+        }
     }, jumpDuration);
 }
+
+// Function to add "Get directions" text
+function addDirections() {
+    const directionsText = document.createElement('p');
+    directionsText.textContent = 'Get directions';
+    directionsText.style.marginTop = '10px';
+    directionsText.style.color = '#0056b3';
+    directionsText.style.cursor = 'pointer';
+    directionsText.addEventListener('click', () => {
+        window.open(itemLink.href, '_blank');
+    });
+    nameContainer.appendChild(directionsText);
+}
+
+// Event listener for the toggle button
+toggleButton.addEventListener('change', () => {
+    if (toggleButton.checked) {
+        toggleStatus.textContent = 'Cocktails';
+        currentList = animals; // Switch to cocktail names
+    } else {
+        toggleStatus.textContent = 'Pints';
+        currentList = pubs; // Switch back to pub names
+    }
+});
+
+// HTML button onclick handler
+changeNameButton.addEventListener('click', animateJump);
 
 
 
