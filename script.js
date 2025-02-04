@@ -92,42 +92,26 @@ let hasAddedDirections = false; // Flag to check if "Get directions" has been ad
 
 
 
-// Function to get the user's current location
+// Get user's current location
 function getUserLocation() {
-    return new Promise((resolve, reject) => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    userLocation = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-                    resolve(userLocation);
-                },
-                (error) => {
-                    console.error("Error getting location:", error);
-                    reject(error);
-                }
-            );
-        } else {
-            console.error("Geolocation is not supported by this browser.");
-            reject("Geolocation not supported.");
-        }
-    });
-}
-
-// Function to extract latitude & longitude from Google Maps URL
-function extractCoordinates(url) {
-    const match = url.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
-    if (match) {
-        return { lat: parseFloat(match[1]), lng: parseFloat(match[2]) };
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                userLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+            },
+            (error) => {
+                console.error("Error getting location:", error);
+            }
+        );
+    } else {
+        console.error("Geolocation is not supported by this browser.");
     }
-    return null;
 }
 
-
-
-// Function to calculate walking time using Google Maps Distance Matrix API
+// Function to calculate walking time
 function getWalkingTime(destination) {
     if (!userLocation) {
         console.error("User location not available.");
@@ -138,7 +122,7 @@ function getWalkingTime(destination) {
     service.getDistanceMatrix(
         {
             origins: [`${userLocation.lat},${userLocation.lng}`],
-            destinations: [`${destination.lat},${destination.lng}`],
+            destinations: [destination],
             travelMode: "WALKING",
         },
         (response, status) => {
@@ -156,25 +140,11 @@ function getWalkingTime(destination) {
     );
 }
 
-// Function to display walking time under the pub name
-function displayWalkingTime(timeText) {
-    let walkingTimeElement = document.getElementById("walkingTime");
-    if (!walkingTimeElement) {
-        walkingTimeElement = document.createElement("p");
-        walkingTimeElement.id = "walkingTime";
-        walkingTimeElement.style.marginTop = "10px";
-        walkingTimeElement.style.color = "#333";
-        nameContainer.appendChild(walkingTimeElement);
-    }
-    walkingTimeElement.textContent = `${timeText} walk`;
-}
-
-
 
 
 
 // Modify animateJump function to include walking time calculation
-async function animateJump() {
+function animateJump() {
     if (isAnimating) return;
 
     isAnimating = true;
@@ -190,34 +160,37 @@ async function animateJump() {
         index = (index + 1) % currentList.length;
     }, intervalSpeed);
 
-    setTimeout(async () => {
+    setTimeout(() => {
         clearInterval(interval);
         const randomItem = currentList[Math.floor(Math.random() * currentList.length)];
         itemLink.textContent = randomItem.name;
         itemLink.href = randomItem.url;
         isAnimating = false;
 
-        // Ensure user location is fetched before calculating distance
-        try {
-            await getUserLocation();
-            const destination = extractCoordinates(randomItem.url);
-            if (destination) {
-                getWalkingTime(destination);
-            } else {
-                console.error("Failed to extract coordinates from URL.");
-            }
-        } catch (error) {
-            console.error("Could not get user location:", error);
-        }
+        // Get walking time after landing on a pub
+        const destination = randomItem.url.split("@")[1].split(",")[0] + "," + randomItem.url.split("@")[1].split(",")[1];
+        getWalkingTime(destination);
     }, jumpDuration);
 }
 
-// Load user location on page load
+// Call getUserLocation on page load
 getUserLocation();
 
 
 
 
+// Function to add "Get directions" text
+function addDirections() {
+    const directionsText = document.createElement('p');
+    directionsText.textContent = 'Get directions';
+    directionsText.style.marginTop = '10px';
+    directionsText.style.color = '#0056b3';
+    directionsText.style.cursor = 'pointer';
+    directionsText.addEventListener('click', () => {
+        window.open(itemLink.href, '_blank');
+    });
+    nameContainer.appendChild(directionsText);
+}
 
 // Event listener for the toggle button
 toggleButton.addEventListener('change', () => {
@@ -287,5 +260,4 @@ function changePub() {
         }
     }, 150);
 }
-
 
