@@ -3,6 +3,7 @@ const toggleStatus = document.getElementById('toggleStatus');
 const itemLink = document.getElementById('itemLink');
 const changeNameButton = document.querySelector('.change-name-button');
 const nameContainer = document.querySelector('.name-container');
+let userLocation = null;
 
 
 // Cookie Consent Popup Logic
@@ -29,8 +30,6 @@ acceptCookiesButton.addEventListener('click', () => {
     // Initialize Google Analytics after consent
     gtag('config', 'G-3S5PMLPMEJ'); // Replace with your GA ID
 });
-
-
 
 
 const pubs = [
@@ -84,20 +83,74 @@ const animals = [
 ];
 
 
-
-
+// Function to add the phrase get directions after first click
 let currentList = pubs; // Default list is pubs
 let isAnimating = false;
 let hasAddedDirections = false; // Flag to check if "Get directions" has been added
 
-// Function to animate the list jumping through options
+
+
+
+
+// Get user's current location
+function getUserLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                userLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+            },
+            (error) => {
+                console.error("Error getting location:", error);
+            }
+        );
+    } else {
+        console.error("Geolocation is not supported by this browser.");
+    }
+}
+
+// Function to calculate walking time
+function getWalkingTime(destination) {
+    if (!userLocation) {
+        console.error("User location not available.");
+        return;
+    }
+
+    const service = new google.maps.DistanceMatrixService();
+    service.getDistanceMatrix(
+        {
+            origins: [`${userLocation.lat},${userLocation.lng}`],
+            destinations: [destination],
+            travelMode: "WALKING",
+        },
+        (response, status) => {
+            if (status === "OK" && response.rows.length > 0) {
+                const element = response.rows[0].elements[0];
+                if (element.status === "OK") {
+                    displayWalkingTime(element.duration.text);
+                } else {
+                    console.error("Error getting walking time:", element.status);
+                }
+            } else {
+                console.error("Distance Matrix request failed due to:", status);
+            }
+        }
+    );
+}
+
+
+
+
+// Modify animateJump function to include walking time calculation
 function animateJump() {
-    if (isAnimating) return; // Prevent multiple clicks during animation
+    if (isAnimating) return;
 
     isAnimating = true;
     let index = 0;
-    const jumpDuration = 2000; // Total animation duration (2 seconds)
-    const intervalSpeed = 150; // Speed of the jumps (100 milliseconds)
+    const jumpDuration = 2000;
+    const intervalSpeed = 150;
 
     const interval = setInterval(() => {
         const item = currentList[index];
@@ -107,7 +160,6 @@ function animateJump() {
         index = (index + 1) % currentList.length;
     }, intervalSpeed);
 
-    // Stop the animation after the jump duration and land on a final item
     setTimeout(() => {
         clearInterval(interval);
         const randomItem = currentList[Math.floor(Math.random() * currentList.length)];
@@ -115,13 +167,17 @@ function animateJump() {
         itemLink.href = randomItem.url;
         isAnimating = false;
 
-        // Add "Get directions" if it's the first time the button is clicked
-        if (!hasAddedDirections) {
-            addDirections();
-            hasAddedDirections = true;
-        }
+        // Get walking time after landing on a pub
+        const destination = randomItem.url.split("@")[1].split(",")[0] + "," + randomItem.url.split("@")[1].split(",")[1];
+        getWalkingTime(destination);
     }, jumpDuration);
 }
+
+// Call getUserLocation on page load
+getUserLocation();
+
+
+
 
 // Function to add "Get directions" text
 function addDirections() {
